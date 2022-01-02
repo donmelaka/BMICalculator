@@ -10,3 +10,5 @@ const kTitleTextStyle = TextStyle(
   fontSize: kFontSize,
   color: kTextColor,
 );
+
+const kNumberStyle = TextStyle(fontSize: 50, fontWeight: FontWeight.w900);

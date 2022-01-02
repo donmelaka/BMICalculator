@@ -28,6 +28,8 @@ class _InputPageState extends State<InputPage> {
   Color _maleCardColor = backGroundColorInactive;
   Color _femaleCardColor = backGroundColorInactive;
   double _currentHeight = 100.0;
+  int _currentWeight = 0;
+  int _currentAge = 0;
 
   void selectGender(GenderType genderType) {
     print('Pressed card' + genderType.toString());
@@ -108,8 +110,7 @@ class _InputPageState extends State<InputPage> {
                         Text(
                           _currentHeight.round().toString(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 50, fontWeight: FontWeight.w900),
+                          style: kNumberStyle,
                         ),
                         Text(
                           'cm',
@@ -145,12 +146,92 @@ class _InputPageState extends State<InputPage> {
                 child: ReusableCard(
                   onTapFunction: () {},
                   color: backGroundColor,
+                  childCard: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'WEIGHT',
+                        style: kTitleTextStyle,
+                      ),
+                      Text(
+                        _currentWeight.toString(),
+                        style: kNumberStyle,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedButton(
+                            icon: Icon(FontAwesomeIcons.minus),
+                            onPressed: () {
+                              setState(() {
+                                _currentWeight == 0 ? () {} : _currentWeight--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          RoundedButton(
+                            icon: Icon(FontAwesomeIcons.plus),
+                            onPressed: () {
+                              setState(() {
+                                _currentWeight++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
                 child: ReusableCard(
                   onTapFunction: () {},
                   color: backGroundColor,
+                  childCard: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'AGE',
+                        style: kTitleTextStyle,
+                      ),
+                      Text(
+                        _currentAge.toString(),
+                        style: kNumberStyle,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedButton(
+                            icon: Icon(FontAwesomeIcons.minus),
+                            onPressed: () {
+                              setState(() {
+                                _currentAge == 0 ? () {} : _currentAge--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          RoundedButton(
+                            icon: Icon(FontAwesomeIcons.plus),
+                            onPressed: () {
+                              setState(() {
+                                _currentAge++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -168,6 +249,35 @@ class _InputPageState extends State<InputPage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class RoundedButton extends StatelessWidget {
+  final Icon _icon;
+  final Function _onPressed;
+
+  const RoundedButton(
+      {Key? key, required Icon icon, required Function onPressed})
+      : _icon = icon,
+        _onPressed = onPressed,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: () {
+        _onPressed();
+      },
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      fillColor: kTextColor,
+      child: _icon,
+      shape: CircleBorder(
+        side: BorderSide.none,
+      ),
     );
   }
 }
