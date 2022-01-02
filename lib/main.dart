@@ -1,4 +1,7 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'input_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,42 +16,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        primaryColor: Color(0xFF0A0D22),
-        appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-              backgroundColor: Color(0xFF0A0D22),
-            ),
-        scaffoldBackgroundColor: Color(0xFF0A0D22),
-      ),
+          primaryColor: Color(0xFF0A0D22),
+          appBarTheme: ThemeData.dark().appBarTheme.copyWith(
+                backgroundColor: Color(0xFF0A0D22),
+              ),
+          scaffoldBackgroundColor: Color(0xFF0A0D22),
+          sliderTheme: SliderTheme.of(context).copyWith(
+            activeTrackColor: Colors.white,
+            inactiveTrackColor: kTextColor,
+            thumbColor: bottomBarColor,
+            overlayColor: Color(0x29EB1555),
+            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+            trackHeight: 1,
+          )),
       home: const InputPage(title: 'BMI Calculator'),
-    );
-  }
-}
-
-class InputPage extends StatefulWidget {
-  const InputPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<InputPage> createState() => _InputPageState();
-}
-
-class _InputPageState extends State<InputPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: Text(
-        'Body',
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
