@@ -109,16 +109,16 @@ extension BMIValueExtension on BMIValue {
 
   String get description {
     switch (this) {
-      case BMIValue.overWeight:
+      case BMIValue.underWeight:
         return 'You are under weight, gaining some weight would be good';
       case BMIValue.normal:
-        return 'Your BMI is within the nomarl range. Great work!';
+        return 'Your BMI is within the normal range. Great work!';
       case BMIValue.overWeight:
         return 'You are over weight. Would be nice to loose some weight';
       case BMIValue.obese:
-        return 'You are over obese. Would be nice to loose some weight';
+        return 'You are obese. Would be nice to loose some weight';
       default:
-        return 'You are over obese. Would be nice to loose some weight';
+        return 'You are extremely obese. Would be nice to loose some weight';
     }
   }
 
