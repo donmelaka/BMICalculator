@@ -1,14 +1,12 @@
+import 'dart:math';
+
 import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/result.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'gender_card.dart';
 import 'reusable_card.dart';
-
-const bottomContainerHeight = 80.0;
-const backGroundColor = Color(0xFF201F34);
-const backGroundColorInactive = Color(0xFF111328);
-const bottomBarColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key, required this.title}) : super(key: key);
@@ -25,8 +23,8 @@ enum GenderType {
 
 class _InputPageState extends State<InputPage> {
   GenderType? _selectedGender;
-  Color _maleCardColor = backGroundColorInactive;
-  Color _femaleCardColor = backGroundColorInactive;
+  Color _maleCardColor = kBackGroundColorInactive;
+  Color _femaleCardColor = kBackGroundColorInactive;
   double _currentHeight = 100.0;
   int _currentWeight = 0;
   int _currentAge = 0;
@@ -37,12 +35,12 @@ class _InputPageState extends State<InputPage> {
       _selectedGender = genderType;
       GenderType.male == genderType
           ? () {
-              _maleCardColor = backGroundColor;
-              _femaleCardColor = backGroundColorInactive;
+              _maleCardColor = kBackGroundColor;
+              _femaleCardColor = kBackGroundColorInactive;
             }()
           : () {
-              _femaleCardColor = backGroundColor;
-              _maleCardColor = backGroundColorInactive;
+              _femaleCardColor = kBackGroundColor;
+              _maleCardColor = kBackGroundColorInactive;
             }();
     });
   }
@@ -87,7 +85,7 @@ class _InputPageState extends State<InputPage> {
         Expanded(
           child: ReusableCard(
             onTapFunction: () {},
-            color: backGroundColor,
+            color: kBackGroundColor,
             childCard: Container(
               margin: EdgeInsets.only(
                 top: 10,
@@ -145,7 +143,7 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: ReusableCard(
                   onTapFunction: () {},
-                  color: backGroundColor,
+                  color: kBackGroundColor,
                   childCard: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -191,7 +189,7 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: ReusableCard(
                   onTapFunction: () {},
-                  color: backGroundColor,
+                  color: kBackGroundColor,
                   childCard: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -237,11 +235,30 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
         ),
-        Container(
-          color: bottomBarColor,
-          margin: EdgeInsets.only(top: 10),
-          width: double.infinity,
-          height: bottomContainerHeight,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (ctx) {
+                return Result(
+                  bmi: _currentWeight / (pow(_currentHeight / 100, 2)).toDouble(),
+                  gender: _selectedGender,
+                );
+              },
+            ));
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.only(bottom: 20),
+            child: Text('CALCULATE',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w400)),
+            color: kBottomBarColor,
+            margin: EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: kBottomContainerHeight,
+          ),
         ),
       ]),
       floatingActionButton: FloatingActionButton(
